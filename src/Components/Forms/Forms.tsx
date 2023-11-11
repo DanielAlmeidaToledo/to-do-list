@@ -1,26 +1,17 @@
+import { useState } from "react";
+import { UserProps } from "../../Context/Auth";
 import { Grid, Paper, Typography, TextField, Button } from "@mui/material";
 
 interface FormsProps {
     type: string;
-    username: string;
-    password: string;
-    name: string;
-    setUsername: (username: string) => void;
-    setPassword: (password: string) => void;
-    setName: (name: string) => void;
-    handleSubmit: () => void;
+    handleSubmit: (user: UserProps) => void;
 }
 
-export default function Forms({
-    type,
-    username,
-    password,
-    name,
-    setUsername,
-    setPassword,
-    setName,
-    handleSubmit,
-}: FormsProps) {
+export default function Forms({ type, handleSubmit }: FormsProps) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+
     return (
         <Grid item xs={6}>
             <Paper
@@ -96,7 +87,13 @@ export default function Forms({
                         type="button"
                         fullWidth
                         variant="contained"
-                        onClick={handleSubmit}
+                        onClick={() =>
+                            handleSubmit({
+                                username: username,
+                                password: password,
+                                name: name,
+                            })
+                        }
                         sx={{
                             marginTop: 4,
                             backgroundColor: "#9F2DE4",

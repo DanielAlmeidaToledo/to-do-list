@@ -1,33 +1,20 @@
-import { useState } from "react";
+import { UserProps, useAuth } from "../../Context/Auth";
 import { Container, Grid } from "@mui/material";
 import Forms from "../../Components/Forms/Forms";
 import Logo from "../../Components/Logo/Logo";
 
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
+    const { register } = useAuth();
 
-    const handleRegister = () => {
-        console.log(
-            `Name: ${name}, Username: ${username}, Password: ${password}`
-        );
+    const handleRegister = (user: UserProps) => {
+        register(user);
     };
 
     return (
         <Container>
             <Grid container>
                 <Logo />
-                <Forms
-                    type="register"
-                    username={username}
-                    password={password}
-                    name={name}
-                    setUsername={setUsername}
-                    setPassword={setPassword}
-                    setName={setName}
-                    handleSubmit={handleRegister}
-                />
+                <Forms type="register" handleSubmit={handleRegister} />
             </Grid>
         </Container>
     );

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Box } from "@mui/material";
 import Login from "./Pages/Login/Login.tsx";
 import Register from "./Pages/Register/Register.tsx";
+import { AuthProvider } from "./Context/Auth/index.tsx";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 
 const App = () => {
     return (
-        <>
+        <AuthProvider>
             <Box
                 sx={{
                     height: "100vh",
@@ -30,7 +31,7 @@ const App = () => {
             >
                 <RouterProvider router={router} />
             </Box>
-        </>
+        </AuthProvider>
     );
 };
 
