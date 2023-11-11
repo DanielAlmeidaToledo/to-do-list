@@ -58,6 +58,7 @@ export default function Forms({
                         autoComplete="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        sx={{ marginTop: 4 }}
                     />
                     {/* Name */}
                     {type !== "login" && (
@@ -72,6 +73,7 @@ export default function Forms({
                             autoComplete="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            sx={{ marginTop: 4 }}
                         />
                     )}
                     {/* Password */}
@@ -87,6 +89,7 @@ export default function Forms({
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        sx={{ marginTop: 4 }}
                     />
                     {/* Submit */}
                     <Button
@@ -109,10 +112,19 @@ export default function Forms({
             </Paper>
             {type === "login" ? (
                 <Typography sx={{ marginTop: 2, textAlign: "center" }}>
-                    Não tem uma conta? <a href="/register">Cadastre-se</a>
+                    Não tem uma conta?{" "}
+                    <a
+                        href="/register"
+                        style={{
+                            textDecoration: "none",
+                            color: "#9F2DE4",
+                        }}
+                    >
+                        Cadastre-se
+                    </a>
                 </Typography>
             ) : (
-                <Typography sx={{ marginTop: 2 }}>
+                <Typography sx={{ marginTop: 2, textAlign: "center" }}>
                     Já tem uma conta?{" "}
                     <a
                         href="/login"

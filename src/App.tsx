@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Box } from "@mui/material";
 import Login from "./Pages/Login/Login.tsx";
+import Register from "./Pages/Register/Register.tsx";
 
 const router = createBrowserRouter([
     {
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/register",
-        element: <Login />,
+        element: <Register />,
     },
     {
         path: "/",
@@ -17,20 +18,20 @@ const router = createBrowserRouter([
     },
 ]);
 
-export default function App() {
+const App = () => {
     return (
         <>
-            <Box sx={{ height: "100vh", width: "100%" }}>
-                <Box
-                    sx={{
-                        height: "100vh",
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
-                    <RouterProvider router={router} />
-                </Box>
+            <Box
+                sx={{
+                    height: "100vh",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
+                <RouterProvider router={router} />
             </Box>
         </>
     );
-}
+};
+
+export default App;
