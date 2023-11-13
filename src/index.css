@@ -33,3 +33,11 @@ input {
     font-size: 1.4rem;
     padding-left: 1.6rem;
 }
+
+.checkbox {
+    height: 2rem;
+    border: none;
+    border-radius: 10rem;
+    outline: none;
+    background: transparent;
+}

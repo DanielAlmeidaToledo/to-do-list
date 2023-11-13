@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { api } from "../../Services/axios";
+import { useWarningSnackbar } from "../../Helpers/Hooks/useWarningSnackbar";
 
 export type UserProps = {
     username: string;
@@ -9,8 +10,8 @@ export type UserProps = {
 
 type AuthContextProps = {
     user: UserProps | null;
-    login: (user: UserProps) => void;
-    register: (user: UserProps) => void;
+    login: (user: UserProps) => Promise<void>;
+    register: (user: UserProps) => Promise<void>;
     logout: () => void;
 };
 
@@ -18,19 +19,34 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserProps | null>(null);
+    const showWarningSnackbar = useCallback(useWarningSnackbar(), []);
 
     const login = async (user: UserProps) => {
-        await api
-            .post("/api/Auth", {
+        try {
+            const response = await api.post("/api/Auth", {
                 username: user.username,
                 password: user.password,
-            })
-            .then((response: any) => {
-                console.log(response);
-            })
-            .catch((error: any) => {
-                console.log(error);
             });
+
+            // Armazena o token no localStorage
+            const newToken = response.data.token;
+            localStorage.setItem("authToken", newToken);
+
+            setUser(user);
+
+            showWarningSnackbar({
+                msg: "Usuário logado com sucesso!",
+                severity: "success",
+            });
+        } catch (error: any) {
+            if (error.response.status === 400) {
+                showWarningSnackbar({
+                    msg: "Usuário ou senha inválidos!",
+                    severity: "error",
+                });
+            }
+            throw error;
+        }
     };
 
     const register = async (user: UserProps) => {
@@ -40,15 +56,31 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 password: user.password,
                 name: user.name,
             });
-            console.log(response);
+
+            setUser(user);
+
+            showWarningSnackbar({
+                msg: "Usuário cadastrado com sucesso!",
+                severity: "success",
+            });
         } catch (error: any) {
-            console.log(error);
+            if (error.response.status === 400) {
+                showWarningSnackbar({
+                    msg: "Usuário ou senha inválidos!",
+                    severity: "error",
+                });
+            }
+            throw error;
         }
     };
 
     const logout = () => {
+        localStorage.removeItem("authToken");
         setUser(null);
-        console.log("logout");
+        showWarningSnackbar({
+            msg: "Usuário deslogado.",
+            severity: "info",
+        });
     };
 
     return (

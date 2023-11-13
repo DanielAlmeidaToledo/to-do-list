@@ -9,11 +9,11 @@ import {
 
 interface FilterProps {
     name: string;
-    status: string;
-    handleChange: (event: any) => void;
+    status: number | null;
+    setStatus: (status: number) => void;
 }
 
-const Filter = ({ name, status, handleChange }: FilterProps) => {
+const Filter = ({ name, status, setStatus }: FilterProps) => {
     return (
         <Grid container>
             {/* Welcome */}
@@ -37,12 +37,12 @@ const Filter = ({ name, status, handleChange }: FilterProps) => {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         value={status}
-                        onChange={handleChange}
+                        onChange={(e) => setStatus(e.target.value as number)}
                         label="Status"
                     >
-                        <MenuItem value="">Todos</MenuItem>
-                        <MenuItem value="Concluida">Concluídas</MenuItem>
-                        <MenuItem value="Pendentes">Pendentes</MenuItem>
+                        <MenuItem value={2}>Todos</MenuItem>
+                        <MenuItem value={0}>Pendentes</MenuItem>
+                        <MenuItem value={1}>Concluídas</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>

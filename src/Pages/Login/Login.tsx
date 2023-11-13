@@ -2,12 +2,19 @@ import { UserProps, useAuth } from "../../Context/Auth";
 import { Container, Grid } from "@mui/material";
 import Forms from "../../Components/Forms/Forms";
 import Logo from "../../Components/Logo/Logo";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogin = async (user: UserProps) => {
-        login(user);
+        try {
+            await login(user);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

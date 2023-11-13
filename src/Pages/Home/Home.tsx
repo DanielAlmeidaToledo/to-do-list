@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Container, Grid, Paper } from "@mui/material";
+import { Box, Container, Grid, Paper } from "@mui/material";
 import Filter from "../../Components/Filter/Filter";
 import InputAdd from "../../Components/InputAdd/InputAdd";
 import { useAuth } from "../../Context/Auth";
 import { useTasks } from "../../Context/Task";
+import Tasks from "../../Components/Tasks/Tasks";
 
 const stylePaper = {
     padding: 6,
@@ -17,24 +18,20 @@ const stylePaper = {
 };
 
 const Home = () => {
-    const [status, setStatus] = useState("");
+    const [statusFilter, setStatusFilter] = useState(2);
     const [title, setTitle] = useState("");
-
-    const handleChangeStatus = (event: any) => {
-        setStatus(event.target.value);
-    };
-
-    const handleAddTask = () => {
-        console.log("Add: ", title);
-        setTitle("");
-    };
+    const [description, setDescription] = useState("");
 
     const { user } = useAuth();
-    const { tasks, getTasks } = useTasks();
+    const { tasks, getTasks, addTask } = useTasks();
+
+    const handleAddTask = () => {
+        addTask(title, description);
+    };
 
     useEffect(() => {
         getTasks();
-    }, [user]);
+    }, []);
 
     return (
         <Container>
@@ -42,14 +39,15 @@ const Home = () => {
                 <Paper sx={stylePaper}>
                     <Filter
                         name={user?.name || ""}
-                        status={status}
-                        handleChange={handleChangeStatus}
+                        status={statusFilter}
+                        setStatus={setStatusFilter}
                     />
                     <InputAdd
                         title={title}
                         setTitle={setTitle}
                         handleSubmit={handleAddTask}
                     />
+                    {tasks.length !== 0 && <Tasks tasksList={tasks} />}
                 </Paper>
             </Grid>
         </Container>
