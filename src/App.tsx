@@ -1,10 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Box } from "@mui/material";
+import { AuthProvider } from "./Context/Auth/index.tsx";
 import Login from "./Pages/Login/Login.tsx";
 import Register from "./Pages/Register/Register.tsx";
-import { AuthProvider } from "./Context/Auth/index.tsx";
+import Home from "./Pages/Home/Home.tsx";
+import Footer from "./Components/Footer/Footer.tsx";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+    },
     {
         path: "/login",
         element: <Login />,
@@ -12,10 +18,6 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
-    },
-    {
-        path: "/",
-        element: <>Home</>,
     },
 ]);
 
@@ -30,6 +32,7 @@ const App = () => {
                 }}
             >
                 <RouterProvider router={router} />
+                <Footer />
             </Box>
         </AuthProvider>
     );
