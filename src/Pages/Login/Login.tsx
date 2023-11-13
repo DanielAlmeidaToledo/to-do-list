@@ -6,7 +6,7 @@ import Logo from "../../Components/Logo/Logo";
 const Login = () => {
     const { login } = useAuth();
 
-    const handleLogin = (user: UserProps) => {
+    const handleLogin = async (user: UserProps) => {
         login(user);
     };
 

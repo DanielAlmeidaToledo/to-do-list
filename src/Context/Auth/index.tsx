@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { api } from "../../Services/axios";
 
 export type UserProps = {
     username: string;
@@ -18,16 +19,31 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserProps | null>(null);
 
-    const login = (user: UserProps) => {
-        setUser(user);
-        console.log(user);
-        console.log("login");
+    const login = async (user: UserProps) => {
+        await api
+            .post("/api/Auth", {
+                username: user.username,
+                password: user.password,
+            })
+            .then((response: any) => {
+                console.log(response);
+            })
+            .catch((error: any) => {
+                console.log(error);
+            });
     };
 
-    const register = (user: UserProps) => {
-        setUser(user);
-        console.log(user);
-        console.log("register");
+    const register = async (user: UserProps) => {
+        try {
+            const response = await api.post("/api/Auth/SignIn", {
+                username: user.username,
+                password: user.password,
+                name: user.name,
+            });
+            console.log(response);
+        } catch (error: any) {
+            console.log(error);
+        }
     };
 
     const logout = () => {
