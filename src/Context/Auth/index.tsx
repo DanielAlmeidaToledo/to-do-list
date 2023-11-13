@@ -42,7 +42,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 msg: "Usuário logado com sucesso!",
                 severity: "success",
             });
-            setLoading(false);
         } catch (error: any) {
             if (error.response.status === 400) {
                 showWarningSnackbar({
@@ -52,10 +51,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             throw error;
         }
+        setLoading(false);
     };
 
     // Register
     const register = async (user: UserProps) => {
+        setLoading(true);
         try {
             const response = await api.post("/api/Auth/SignIn", {
                 username: user.username,
@@ -78,16 +79,19 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             throw error;
         }
+        setLoading(false);
     };
 
     // Logout
     const logout = () => {
+        setLoading(true);
         localStorage.removeItem("authToken");
         setUser(null);
         showWarningSnackbar({
             msg: "Usuário deslogado.",
             severity: "info",
         });
+        setLoading(false);
     };
 
     return (

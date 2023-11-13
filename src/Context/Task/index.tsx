@@ -68,7 +68,14 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
         await api
             .get(`/api/ToDo/MarkAsDone/${id}`)
             .then((response: any) => {
-                console.log(response);
+                let newTasks: TaskProps[] = tasks.map((task: TaskProps) => {
+                    if (task.id === id) {
+                        task.status = 1;
+                    }
+                    return task;
+                });
+
+                setTasks(newTasks);
             })
             .catch((error: any) => {
                 console.log(error);
