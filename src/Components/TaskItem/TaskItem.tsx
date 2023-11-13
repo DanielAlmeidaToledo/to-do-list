@@ -53,6 +53,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
                         "&.Mui-checked": {
                             color: "#9f2de4",
                         },
+                        "& .MuiSvgIcon-root": { fontSize: 32 },
                     }}
                 />
                 <Typography

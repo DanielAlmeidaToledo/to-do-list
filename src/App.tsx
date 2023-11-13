@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Box } from "@mui/material";
 import { SnackbarProvider } from "notistack";
+import { LoadingProvider } from "./Context/Loading/index.tsx";
 import { AuthProvider } from "./Context/Auth/index.tsx";
 import { TasksProvider } from "./Context/Task/index.tsx";
 import Login from "./Pages/Login/Login.tsx";
@@ -26,20 +27,22 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <SnackbarProvider>
-            <AuthProvider>
-                <TasksProvider>
-                    <Box
-                        sx={{
-                            height: "100vh",
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
-                        <RouterProvider router={router} />
-                        <Footer />
-                    </Box>
-                </TasksProvider>
-            </AuthProvider>
+            <LoadingProvider>
+                <AuthProvider>
+                    <TasksProvider>
+                        <Box
+                            sx={{
+                                height: "100vh",
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            <RouterProvider router={router} />
+                            <Footer />
+                        </Box>
+                    </TasksProvider>
+                </AuthProvider>
+            </LoadingProvider>
         </SnackbarProvider>
     );
 };

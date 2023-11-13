@@ -1,5 +1,4 @@
 import { IconButton } from "@mui/material";
-import { TaskProps } from "../../Context/Task";
 
 interface ButtonIconProps {
     ariaLabel: string;

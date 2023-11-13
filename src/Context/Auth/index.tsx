@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback } from "react";
 import { api } from "../../Services/axios";
 import { useWarningSnackbar } from "../../Helpers/Hooks/useWarningSnackbar";
+import { useLoading } from "../Loading";
 
 export type UserProps = {
     username: string;
@@ -20,8 +21,11 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserProps | null>(null);
     const showWarningSnackbar = useCallback(useWarningSnackbar(), []);
+    const { setLoading } = useLoading();
 
+    // Login
     const login = async (user: UserProps) => {
+        setLoading(true);
         try {
             const response = await api.post("/api/Auth", {
                 username: user.username,
@@ -38,6 +42,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 msg: "Usuário logado com sucesso!",
                 severity: "success",
             });
+            setLoading(false);
         } catch (error: any) {
             if (error.response.status === 400) {
                 showWarningSnackbar({
@@ -49,6 +54,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    // Register
     const register = async (user: UserProps) => {
         try {
             const response = await api.post("/api/Auth/SignIn", {
@@ -74,6 +80,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    // Logout
     const logout = () => {
         localStorage.removeItem("authToken");
         setUser(null);
