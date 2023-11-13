@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Box } from "@mui/material";
 import { AuthProvider } from "./Context/Auth/index.tsx";
+import { TasksProvider } from "./Context/Task/index.tsx";
 import Login from "./Pages/Login/Login.tsx";
 import Register from "./Pages/Register/Register.tsx";
 import Home from "./Pages/Home/Home.tsx";
@@ -24,16 +25,18 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <AuthProvider>
-            <Box
-                sx={{
-                    height: "100vh",
-                    display: "flex",
-                    alignItems: "center",
-                }}
-            >
-                <RouterProvider router={router} />
-                <Footer />
-            </Box>
+            <TasksProvider>
+                <Box
+                    sx={{
+                        height: "100vh",
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <RouterProvider router={router} />
+                    <Footer />
+                </Box>
+            </TasksProvider>
         </AuthProvider>
     );
 };

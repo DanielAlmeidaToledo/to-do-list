@@ -1,4 +1,3 @@
-import { useAuth } from "../../Context/Auth";
 import {
     Grid,
     FormControl,
@@ -9,13 +8,12 @@ import {
 } from "@mui/material";
 
 interface FilterProps {
+    name: string;
     status: string;
     handleChange: (event: any) => void;
 }
 
-const Filter = ({ status, handleChange }: FilterProps) => {
-    const { user } = useAuth();
-
+const Filter = ({ name, status, handleChange }: FilterProps) => {
     return (
         <Grid container>
             {/* Welcome */}
@@ -27,9 +25,7 @@ const Filter = ({ status, handleChange }: FilterProps) => {
                     alignItems: "end",
                 }}
             >
-                <Typography variant="h5">
-                    Olá, {user?.name || "User"}
-                </Typography>
+                <Typography variant="h5">Olá, {name || "User"}</Typography>
             </Grid>
             {/* Filter */}
             <Grid item xs={6} sx={{ display: "flex", justifyContent: "end" }}>
