@@ -66,6 +66,7 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const changeStatus = async (id: number) => {
+        setLoading(true);
         api.defaults.headers.authorization =
             `Bearer ${localStorage.getItem("authToken")}` || "";
 
@@ -79,14 +80,22 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
                     return task;
                 });
 
+                showWarningSnackbar({
+                    msg: "Tarefa completa com sucesso!",
+                    severity: "success",
+                });
+
+                setLoading(false);
                 setTasks(newTasks);
             })
             .catch((error: any) => {
+                setLoading(false);
                 console.log(error);
             });
     };
 
     const deleteTask = async (id: number) => {
+        setLoading(true);
         api.defaults.headers.authorization =
             `Bearer ${localStorage.getItem("authToken")}` || "";
 
@@ -94,12 +103,14 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
             .delete(`/api/ToDo/${id}`)
             .then((response: any) => {
                 setTasks(tasks.filter((task: TaskProps) => task.id !== id));
+                setLoading(false);
                 showWarningSnackbar({
                     msg: "Tarefa deletada com sucesso!",
                     severity: "success",
                 });
             })
             .catch((error: any) => {
+                setLoading(false);
                 console.log(error);
             });
     };
