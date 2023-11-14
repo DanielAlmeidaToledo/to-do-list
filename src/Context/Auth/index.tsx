@@ -72,8 +72,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(user);
             setLoading(false);
 
-            console.log(response);
-
             showWarningSnackbar({
                 msg: "Usuário cadastrado com sucesso!",
                 severity: "success",

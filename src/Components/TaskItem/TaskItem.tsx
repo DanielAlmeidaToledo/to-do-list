@@ -34,14 +34,14 @@ const TaskItem = ({ task }: TaskItemProps) => {
                 borderRadius: "8px",
                 padding: "0.5rem",
                 marginBottom: "1rem",
-                width: "100%",
+                width: "95%",
             }}
         >
             <Box
                 sx={{
                     display: "flex",
                     alignItems: "center",
-                    width: "95%",
+                    width: "109%",
                 }}
             >
                 <Checkbox
