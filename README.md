@@ -30,9 +30,7 @@ Certifique-se de ter o Node.js e o Yarn instalados em sua máquina. Caso contrá
     yarn install
     ```
 
-## Executando a Aplicação
-
-Após a instalação e configuração, você pode iniciar a aplicação localmente usando o seguinte comando:
+4. Inicie a aplicação localmente:
 
     ```bash
     yarn dev
