@@ -10,6 +10,7 @@
 
 button {
     width: 100%;
+    min-width: 7rem;
     height: 3.4rem;
     border: none;
     border-radius: 10rem;

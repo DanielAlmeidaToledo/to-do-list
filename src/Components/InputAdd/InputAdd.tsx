@@ -17,14 +17,15 @@ const InputAdd = ({ title, setTitle, handleSubmit }: InputAddProps) => {
             }}
         >
             {/* Welcome */}
-            <Grid item xs={8} sx={{}}>
+            <Grid item xs={8} sm={6} md={8} lg={8} sx={{}}>
                 <input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </Grid>
             {/* Filter */}
-            <Grid item xs={4}>
+            {/* xs={12} sm={12} md={6} lg={6} */}
+            <Grid item xs={4} sm={6} md={4} lg={4}>
                 <button onClick={() => handleSubmit()}>Adicionar</button>
             </Grid>
         </Grid>

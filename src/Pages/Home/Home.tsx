@@ -15,6 +15,7 @@ const stylePaper = {
     flexDirection: "column",
     alignItems: "center",
     width: "45%",
+    minWidth: "300px",
     borderRadius: "8px",
     margin: "auto",
     gap: "2.4rem",

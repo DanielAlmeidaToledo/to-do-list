@@ -1,6 +1,16 @@
+import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 
 export default function Footer() {
+    const [show, setShow] = useState(true);
+    const innerWidth = window.innerWidth;
+
+    useEffect(() => {
+        if (window.innerWidth <= 900) setShow(false);
+    }, []);
+
+    if (!show) return null;
+
     return (
         <Box
             sx={{

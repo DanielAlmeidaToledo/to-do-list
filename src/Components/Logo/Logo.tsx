@@ -5,7 +5,10 @@ export default function Logo() {
     return (
         <Grid
             item
-            xs={6}
+            xs={12}
+            sm={12}
+            md={6}
+            lg={6}
             sx={{
                 display: "flex",
                 flexDirection: "column",

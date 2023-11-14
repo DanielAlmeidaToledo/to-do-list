@@ -29,7 +29,10 @@ const Filter = ({ username, status, setStatus }: FilterProps) => {
             </Grid>
             {/* Filter */}
             <Grid item xs={6} sx={{ display: "flex", justifyContent: "end" }}>
-                <FormControl variant="standard" sx={{ minWidth: 240 }}>
+                <FormControl
+                    variant="standard"
+                    sx={{ width: 240, minWidth: 100 }}
+                >
                     <InputLabel id="demo-simple-select-standard-label">
                         Status
                     </InputLabel>

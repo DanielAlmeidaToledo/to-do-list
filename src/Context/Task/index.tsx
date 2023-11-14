@@ -84,7 +84,7 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
                 });
 
                 showWarningSnackbar({
-                    msg: "Tarefa completa com sucesso!",
+                    msg: "Tarefa completada com sucesso!",
                     severity: "success",
                 });
 
