@@ -1,7 +1,5 @@
 # Aplicação To-Do List em ReactJS
 
-Figma: https://www.figma.com/file/iR5asGnEZz4eKY7cLTR7Qm/To-Do-List?type=design&node-id=0%3A1&mode=design&t=0K14pl1aTxpOlpD9-1
-
 ## Visão Geral
 
 Bem-vindo à documentação da aplicação To-Do List em ReactJS! Esta aplicação permite aos usuários gerenciar suas tarefas diárias de forma eficiente, incluindo a capacidade de realizar login, adicionar novas tarefas, marcar tarefas como concluídas, remover tarefas da lista e filtrar tarefas com base no status.
@@ -35,6 +33,23 @@ Certifique-se de ter o Node.js e o Yarn instalados em sua máquina. Caso contrá
     ```bash
     yarn dev
     ```
+
+## Prototipação - Figma
+
+https://www.figma.com/file/iR5asGnEZz4eKY7cLTR7Qm/To-Do-List?type=design&node-id=0%3A1&mode=design&t=0K14pl1aTxpOlpD9-1
+
+![image](https://github.com/DanielAlmeidaToledo/to-do-list/assets/96501443/7eb87dd4-257a-4cc9-aabc-a3b017f379c9)
+
+## Tecnologias
+
+- React.JS
+- Typescript
+- MUI
+- Axios
+- React-router-dom
+- Context
+- Notistack
+- Jest
 
 ## Funcionalidades
 
