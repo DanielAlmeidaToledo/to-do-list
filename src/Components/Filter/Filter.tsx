@@ -8,12 +8,12 @@ import {
 } from "@mui/material";
 
 interface FilterProps {
-    name: string;
+    username: string;
     status: number | null;
     setStatus: (status: number) => void;
 }
 
-const Filter = ({ name, status, setStatus }: FilterProps) => {
+const Filter = ({ username, status, setStatus }: FilterProps) => {
     return (
         <Grid container>
             {/* Welcome */}
@@ -25,7 +25,7 @@ const Filter = ({ name, status, setStatus }: FilterProps) => {
                     alignItems: "end",
                 }}
             >
-                <Typography variant="h5">Olá, {name || "User"}</Typography>
+                <Typography variant="h5">Olá, {username || "User"}</Typography>
             </Grid>
             {/* Filter */}
             <Grid item xs={6} sx={{ display: "flex", justifyContent: "end" }}>

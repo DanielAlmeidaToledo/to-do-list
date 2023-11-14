@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { Box, Checkbox, Typography } from "@mui/material";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import ClearIcon from "@mui/icons-material/Clear";
-import AddCommentIcon from "@mui/icons-material/AddComment";
 import { TaskProps, useTasks } from "../../Context/Task";
 import { useWarningSnackbar } from "../../Helpers/Hooks/useWarningSnackbar";
 
@@ -68,11 +67,6 @@ const TaskItem = ({ task }: TaskItemProps) => {
                     {task.title}
                 </Typography>
             </Box>
-            <ButtonIcon
-                ariaLabel="addObs"
-                icon={<AddCommentIcon />}
-                handleClick={() => console.log("Obs")}
-            />
             <ButtonIcon
                 ariaLabel="delete"
                 icon={<ClearIcon />}

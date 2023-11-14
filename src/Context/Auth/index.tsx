@@ -37,12 +37,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             localStorage.setItem("authToken", newToken);
 
             setUser(user);
+            setLoading(false);
 
             showWarningSnackbar({
                 msg: "Usuário logado com sucesso!",
                 severity: "success",
             });
         } catch (error: any) {
+            setLoading(false);
             if (error.response.status === 400) {
                 showWarningSnackbar({
                     msg: "Usuário ou senha inválidos!",
@@ -51,7 +53,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             throw error;
         }
-        setLoading(false);
     };
 
     // Register
@@ -64,7 +65,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 name: user.name,
             });
 
+            // Armazena o token no localStorage
+            const newToken = response.data.token;
+            localStorage.setItem("authToken", newToken);
+
             setUser(user);
+            setLoading(false);
+
+            console.log(response);
 
             showWarningSnackbar({
                 msg: "Usuário cadastrado com sucesso!",
@@ -72,6 +80,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             });
         } catch (error: any) {
             if (error.response.status === 400) {
+                setLoading(false);
                 showWarningSnackbar({
                     msg: "Usuário ou senha inválidos!",
                     severity: "error",
@@ -79,7 +88,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             throw error;
         }
-        setLoading(false);
     };
 
     // Logout
@@ -87,11 +95,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setLoading(true);
         localStorage.removeItem("authToken");
         setUser(null);
+        setLoading(false);
         showWarningSnackbar({
             msg: "Usuário deslogado.",
             severity: "info",
         });
-        setLoading(false);
     };
 
     return (

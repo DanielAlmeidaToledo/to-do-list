@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback } from "react";
 import { api } from "../../Services/axios";
 import { useWarningSnackbar } from "../../Helpers/Hooks/useWarningSnackbar";
+import { useLoading } from "../Loading";
 
 export type TaskProps = {
     id: number;
@@ -24,18 +25,21 @@ const TasksContext = createContext<TasksContextProps>({} as TasksContextProps);
 const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     const [tasks, setTasks] = useState<TaskProps[] | []>([]);
     const showWarningSnackbar = useCallback(useWarningSnackbar(), []);
+    const { setLoading } = useLoading();
 
     const getTasks = async () => {
+        setLoading(true);
         api.defaults.headers.authorization =
             `Bearer ${localStorage.getItem("authToken")}` || "";
 
         await api
             .get("/api/ToDo")
             .then((response: any) => {
-                console.log(response.data);
+                setLoading(false);
                 setTasks(response.data);
             })
             .catch((error: any) => {
+                setLoading(false);
                 console.log(error);
             });
     };
