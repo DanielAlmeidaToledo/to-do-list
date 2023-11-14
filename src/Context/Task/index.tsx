@@ -45,6 +45,7 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const addTask = async (title: string, description: string) => {
+        setLoading(true);
         api.defaults.headers.authorization =
             `Bearer ${localStorage.getItem("authToken")}` || "";
 
@@ -55,12 +56,14 @@ const TasksProvider = ({ children }: { children: React.ReactNode }) => {
             })
             .then((response: any) => {
                 setTasks([...tasks, response.data]);
+                setLoading(false);
                 showWarningSnackbar({
                     msg: "Tarefa adicionada com sucesso!",
                     severity: "success",
                 });
             })
             .catch((error: any) => {
+                setLoading(false);
                 console.log(error);
             });
     };

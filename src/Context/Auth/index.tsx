@@ -82,7 +82,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             if (error.response.status === 400) {
                 setLoading(false);
                 showWarningSnackbar({
-                    msg: "Usuário ou senha inválidos!",
+                    msg: "Dados inválidos!",
                     severity: "error",
                 });
             }

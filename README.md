@@ -1,5 +1,7 @@
 # Aplicação To-Do List em ReactJS
 
+Figma: https://www.figma.com/file/iR5asGnEZz4eKY7cLTR7Qm/To-Do-List?type=design&node-id=0%3A1&mode=design&t=0K14pl1aTxpOlpD9-1
+
 ## Visão Geral
 
 Bem-vindo à documentação da aplicação To-Do List em ReactJS! Esta aplicação permite aos usuários gerenciar suas tarefas diárias de forma eficiente, incluindo a capacidade de realizar login, adicionar novas tarefas, marcar tarefas como concluídas, remover tarefas da lista e filtrar tarefas com base no status.

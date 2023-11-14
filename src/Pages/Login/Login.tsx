@@ -1,3 +1,4 @@
+import { useWarningSnackbar } from "../../Helpers/Hooks/useWarningSnackbar";
 import { UserProps, useAuth } from "../../Context/Auth";
 import { Container, Grid } from "@mui/material";
 import Forms from "../../Components/Forms/Forms";
@@ -7,13 +8,21 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const showWarningSnackbar = useWarningSnackbar();
 
     const handleLogin = async (user: UserProps) => {
-        try {
-            await login(user);
-            navigate("/");
-        } catch (error) {
-            console.log(error);
+        if (user.username === "" || user.password === "") {
+            showWarningSnackbar({
+                msg: "Preencha todos os campos!",
+                severity: "error",
+            });
+        } else {
+            try {
+                await login(user);
+                navigate("/");
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
